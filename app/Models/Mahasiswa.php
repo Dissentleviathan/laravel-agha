@@ -18,6 +18,9 @@ class Mahasiswa extends Model
         'kota_lahir',
         'prodi_id'
     ];
+    public function getTanggalAttribute ($value) {
+        return Carbon::createFromFormat('Y-m-d', $value)->format('1 d M Y');
+    }
 
     public function prodi()
     {
