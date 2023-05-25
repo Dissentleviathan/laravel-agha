@@ -13,27 +13,35 @@
                         </div>
                     @endif
                     <h4 class="card-title">Mahasiswa</h4>
-                    <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary">Tambah</a>
+                    <div class="d-flex justify-content-between">
+                        <form class="col-lg-4 rounded border-info border d-flex" method="GET">
+                            <input type="text" name="search" class="form-control" placeholder="Cari (Nama, NPM, Kota Lahir)">
+                        </form>
+                        <div>
+                        <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary">Tambah</a>
 
                     @if (count($mahasiswas) != 0)
                         <button class="btn btn-danger" id="multi-delete" data-route="{{ route('mhs-multi-delete') }}">Delete
                             All Selected</button>
                     @endif
-
+                    </div>
+                    </div>
+                    
+                    
 
                     <div class="table-responsive">
                         <table class="table table-striped table-hover" id="posts-table">
                             <thead>
                                 <tr>
                                     <th scope="col"><input type="checkbox" class="check-all"></th>
+                                    <th>Foto</th>
                                     <th>NPM</th>
                                     <th>Nama</th>
-                                    <th>Foto</th>
                                     <th>Tanggal Lahir</th>
                                     <th>Kota Lahir</th>
                                     <th>Program Studi</th>
                                     <th>Created At</th>
-                                    <th>#</th>
+                                    <th>Opsi Pilihan</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,11 +50,11 @@
                                         <td>
                                             <input type="checkbox" class="check" value="{{ $item->id }}">
                                         </td>
-                                        <td> {{ $item->npm }} </td>
-                                        <td> {{ $item->nama }} </td>
                                         <td> <img
                                                 src="{{ $item->foto ? asset('storage/' . $item->foto) : asset('images/faces/face5.jpg') }}">
                                         </td>
+                                        <td> {{ $item->npm }} </td>
+                                        <td> {{ $item->nama }} </td>
                                         <td> {{ $item->tanggal }} </td>
                                         <td> {{ $item->kota_lahir }} </td>
                                         <td> {{ $item->prodi->nama_prodi }}</td>
@@ -67,6 +75,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="pagination justify-content-center" >
+                            {{$mahasiswas -> withQueryString()->links('pagination::bootstrap-5')}}
+                        </div>
                     </div>
                 </div>
             </div>

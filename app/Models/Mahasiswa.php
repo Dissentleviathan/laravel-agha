@@ -10,6 +10,14 @@ class Mahasiswa extends Model
 {
     use HasFactory, HasUuids;
     protected $table = 'mahasiswas';
+    protected $fillable = [
+        'foto',
+        'npm',
+        'nama',
+        'tanggal',
+        'kota_lahir',
+        'prodi_id'
+    ];
 
     public function prodi()
     {
