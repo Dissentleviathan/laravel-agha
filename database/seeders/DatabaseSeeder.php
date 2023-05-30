@@ -14,19 +14,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        foreach(range(1,99) as $number) {
-            Mahasiswa::create ([
-                'npm' => '21252500'.$number,
+        foreach (range(1, 99) as $number) {
+            Mahasiswa::create([
+                'npm' => '21252500' . $number,
                 'nama' => fake()->name(),
                 'tanggal' => fake()->date($format = 'Y-m-d', $max = 'now'),
                 'kota_lahir' => fake()->state(),
-                'foto' => 'FH_Knight_Centurion_2021.webp',
-                'prodi_id' => '993ff205-65cc-410f-80d5-b390f473bbc4',
+                'foto' => '1312332.jpg',
+                'prodi_id' => '9949fae8-d1bf-4465-bf2a-131d757735ff'
             ]);
         }
 
         $this->call([
-           FakultasSeeder::class 
+            FakultasSeeder::class
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,16 +11,18 @@ class Mahasiswa extends Model
 {
     use HasFactory, HasUuids;
     protected $table = 'mahasiswas';
+
     protected $fillable = [
-        'foto',
         'npm',
         'nama',
         'tanggal',
         'kota_lahir',
-        'prodi_id'
+        'foto',
+        'prodi_id',
     ];
+
     public function getTanggalAttribute ($value) {
-        return Carbon::createFromFormat('Y-m-d', $value)->format('1 d M Y');
+        return Carbon::createFromFormat('Y-m-d', $value)-> format('l d M Y');
     }
 
     public function prodi()

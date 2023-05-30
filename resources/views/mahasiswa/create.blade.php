@@ -12,13 +12,6 @@
                   <form class="forms-sample" action="{{ route('mahasiswa.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                      <div class="form-group col-lg-6">
-                            <label for="foto">Foto</label>
-                            <input type="file" class="form-control" name="foto" placeholder="">
-                            @error('foto')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
                         <div class="form-group col-lg-6">
                         <label for="npm">Nomor Pokok Mahasiswa</label>
                         <input type="text" class="form-control" name="npm" placeholder="Nomor Pokok Mahasiswa" value="{{ old('npm') }}">
@@ -61,6 +54,13 @@
                             </select>
                             @error('prodi_id')
                                     <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label for="foto">Foto</label>
+                            <input type="file" class="form-control" name="foto" placeholder="">
+                            @error('foto')
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>

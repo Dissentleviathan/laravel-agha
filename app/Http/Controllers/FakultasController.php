@@ -12,6 +12,7 @@ class FakultasController extends Controller
      */
     public function index()
     {
+
         $data = Fakultas::all();
         return view('fakultas.index') ->with('fakultas', $data);
     }

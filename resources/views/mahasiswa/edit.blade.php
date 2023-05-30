@@ -5,12 +5,11 @@
           <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Edit Mahasiswa</h4>
+                  <h4 class="card-title">Tambah Mahasiswa</h4>
                   <p class="card-description">
                     Formulir Edit Mahasiswa
                   </p>
-                  <form class="forms-sample"
-                  action="{{ route('mahasiswa.update' , $mahasiswa->id) }}" method="post" enctype="multipart/form-data">
+                  <form class="forms-sample" action="{{ route('mahasiswa.update', $mahasiswa->id    ) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('patch')
                     <div class="row">
@@ -51,11 +50,7 @@
                             <select name="prodi_id" class="form-control js-example-basic-single">
                                 <option value="">Pilih Nama Program Studi</option>
                                 @foreach ($prodi as $item)
-                                    <option
-                                    @if ($mahasiswa->prodi_id == $item->id)
-                                      selected
-                                    @endif
-                                    value="{{ $item['id'] }}">{{ $item->fakultas->nama_fakultas }} - {{ $item['nama_prodi'] }}</option>
+                                    <option value="{{ $item['id'] }}">{{ $item->fakultas->nama_fakultas }} - {{ $item['nama_prodi'] }}</option>
                                 @endforeach
                             </select>
                             @error('prodi_id')

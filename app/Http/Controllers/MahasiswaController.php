@@ -14,9 +14,10 @@ class MahasiswaController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->query('search');
+
         if ($keyword) {
-            $mahasiswa = Mahasiswa::where('nama', 'LIKE', '%'. $keyword. '%')->paginate(10);
-        } else {
+            $mahasiswa = Mahasiswa::where('nama', 'LIKE', '%' . $keyword . '%')->paginate(10);
+        }else {
             $mahasiswa = Mahasiswa::paginate(10);
         }
         return view('mahasiswa.index')->with('mahasiswas', $mahasiswa);
@@ -85,14 +86,13 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, Mahasiswa $mahasiswa)
     {
-        $validasi = $request->validate([
+         $validasi = $request->validate([
             'nama' => 'required',
             'kota_lahir' => 'required',
             'tanggal' => 'required',
             'prodi_id' => 'required',
             'foto' => 'required|file|image'
         ]);
-
         $mahasiswa->npm = $mahasiswa->npm;
         $mahasiswa->nama = $validasi['nama'];
         $mahasiswa->kota_lahir = $validasi['kota_lahir'];
@@ -101,14 +101,13 @@ class MahasiswaController extends Controller
 
         // upload foto
         $ext = $request->foto->getClientOriginalExtension();
-        $new_filename = $mahasiswa->npm . "." . $ext;
+        $new_filename = $mahasiswa->npm.".".$ext;
         $request->foto->storeAs('public', $new_filename);
 
         $mahasiswa->foto = $new_filename;
         $mahasiswa->save(); // simpan
 
         return redirect()->route('mahasiswa.index')->with('success', "Data mahasiswa " . $validasi['nama'] . " berhasil disimpan");
-
     }
 
     /**

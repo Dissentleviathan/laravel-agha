@@ -20,7 +20,7 @@
                 <thead>
                         <tr>
                             <th>Nama Fakultas</th>
-                            <th>Nama Dekan</th>
+                            <th>nama Dekan</th>
                             <th>Nama Wakil Dekan</th>
                             <th>Prodi</th>
                             <th>Created At</th>

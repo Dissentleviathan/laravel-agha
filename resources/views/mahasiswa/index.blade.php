@@ -14,54 +14,49 @@
                     @endif
                     <h4 class="card-title">Mahasiswa</h4>
                     <div class="d-flex justify-content-between">
-                        <form class="col-lg-4 rounded border-info border d-flex" method="GET">
-                            <input type="text" name="search" class="form-control" placeholder="Cari (Nama, NPM, Kota Lahir)">
+                        <form class="col-lg-6 rounded border-info border d-flex" method="GET">
+                            <input type="text" name="search" class="form-control" placeholder="">
                         </form>
                         <div>
-                        <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary">Tambah</a>
+                            <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary">Tambah</a>
 
-                    @if (count($mahasiswas) != 0)
-                        <button class="btn btn-danger" id="multi-delete" data-route="{{ route('mhs-multi-delete') }}">Delete
-                            All Selected</button>
-                    @endif
+                            <button class="btn btn-danger" id="multi-delete"
+                                data-route="{{ route('mhs-multi-delete') }}">Delete All
+                                Selected</button>
+                        </div>
                     </div>
-                    </div>
-                    
-                    
-
                     <div class="table-responsive">
                         <table class="table table-striped table-hover" id="posts-table">
                             <thead>
                                 <tr>
                                     <th scope="col"><input type="checkbox" class="check-all"></th>
-                                    <th>Foto</th>
                                     <th>NPM</th>
                                     <th>Nama</th>
+                                    <th>Foto</th>
                                     <th>Tanggal Lahir</th>
                                     <th>Kota Lahir</th>
                                     <th>Program Studi</th>
                                     <th>Created At</th>
-                                    <th>Opsi Pilihan</th>
+                                    <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($mahasiswas as $item)
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" class="check" value="{{ $item->id }}">
-                                        </td>
+                                        <td><input type="checkbox" class="check" value="{{ $item->id }}"></td>
+                                        <td> {{ $item->npm }} </td>
+                                        <td> {{ $item->nama }} </td>
                                         <td> <img
                                                 src="{{ $item->foto ? asset('storage/' . $item->foto) : asset('images/faces/face5.jpg') }}">
                                         </td>
-                                        <td> {{ $item->npm }} </td>
-                                        <td> {{ $item->nama }} </td>
                                         <td> {{ $item->tanggal }} </td>
                                         <td> {{ $item->kota_lahir }} </td>
                                         <td> {{ $item->prodi->nama_prodi }}</td>
                                         <td> {{ $item->created_at }} </td>
                                         <td>
                                             <div class="d-flex justify-content-between">
-                                                <a href="{{route('mahasiswa.edit', $item->id)}}"><button class="btn btn-success btn-sm">Edit</button></a>
+                                                <a href="{{ route('mahasiswa.edit', $item->id) }}"><button
+                                                        class="btn btn-success btn-sm">Edit</button></a>
                                                 <form method="post" class="delete-form"
                                                     data-route="{{ route('mahasiswa.destroy', $item->id) }}">
                                                     @method('delete')
@@ -69,15 +64,14 @@
                                                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                                 </form>
                                             </div>
-
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="pagination justify-content-center" >
-                            {{$mahasiswas -> withQueryString()->links('pagination::bootstrap-5')}}
-                        </div>
+                        <div>
+                        </div class="mt-4">
+                        {{ $mahasiswas->withQueryString()->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>
@@ -127,7 +121,7 @@
                                     showCancelButton: false,
                                     confirmButtonText: 'Yes'
                                 }).then((result) => {
-                                    window.location = '/mahasiswa'
+                                    window.location = '/posts'
                                 });
                             }
                         });
@@ -165,7 +159,7 @@
                                     showCancelButton: false,
                                     confirmButtonText: 'Yes'
                                 }).then((result) => {
-                                    window.location = '/mahasiswa'
+                                    window.location = '/posts'
                                 });
                             }
                         });
